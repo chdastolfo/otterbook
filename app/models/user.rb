@@ -8,9 +8,5 @@ class User < ActiveRecord::Base
   :first_name, :last_name, :profile_name
 
   has_many :statuses
-
-  def full_name
-  	first_name.to_s + " " + last_name.to_s
-  end
   
 end

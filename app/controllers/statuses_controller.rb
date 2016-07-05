@@ -1,6 +1,10 @@
 class StatusesController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy]
 
+  #def initialize
+   # @user = User.new
+  #end
+
   # GET /statuses
   # GET /statuses.json
   def index
@@ -21,9 +25,8 @@ class StatusesController < ApplicationController
   def edit
   end
 
-
   def full_name
-    first_name.to_s + " " + last_name.to_s
+    @user.first_name.to_s + " " + @user.last_name.to_s
   end
   # POST /statuses
   # POST /statuses.json
