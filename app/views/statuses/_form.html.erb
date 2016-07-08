@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= f.input :user_id, collection: User.all, label_method: :full_name %>
+  <%= f.collection_select :user_id, @users, :id,:full_name %>
   <%= f.input :content %>
   
   <div class="form-actions">
