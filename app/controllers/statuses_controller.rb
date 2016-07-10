@@ -1,4 +1,5 @@
 class StatusesController < ApplicationController
+  #before_action :authenticate_user!
   before_action :set_status, only: [:show, :edit, :update, :destroy]
 
   #def initialize
@@ -8,27 +9,38 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.all
+    @status = Status.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @statuses }
+    end
   end
 
   # GET /statuses/1
   # GET /statuses/1.json
   def show
+     @status = Status.find(params[:id])
+     respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @status }
+    end
   end
 
   # GET /statuses/new
   def new
     @status = Status.new
-    @users  = User.all
+   respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @status }
+    end
   end
 
   # GET /statuses/1/edit
   def edit
+    @status = Status.find(params[:id])
   end
 
-  def full_name
-    @user.first_name.to_s + " " + @user.last_name.to_s
-  end
+  
   # POST /statuses
   # POST /statuses.json
   def create
@@ -39,7 +51,7 @@ class StatusesController < ApplicationController
         format.html { redirect_to @status, notice: 'Status was successfully created.' }
         format.json { render :show, status: :created, location: @status }
       else
-        format.html { render :new }
+        format.html { render action: "new" }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -53,7 +65,7 @@ class StatusesController < ApplicationController
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
         format.json { render :show, status: :ok, location: @status }
       else
-        format.html { render :edit }
+        format.html { render action: "edit" }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
