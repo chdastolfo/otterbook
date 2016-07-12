@@ -2,13 +2,13 @@
 
 <p>
   <strong>Name:
-  <%= @current_user.full_name %>
+  <%= current_user.full_name %>
   </strong>
 </p>
 
 <p>
   <strong>Content:</strong>
-  <%= status.content %>
+  <%= @status.content %>
 </p>
 
 <%= link_to 'Edit', edit_status_path(@status) %> |
