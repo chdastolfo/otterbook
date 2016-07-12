@@ -4,7 +4,7 @@
       <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
 
       <ul>
-      <% @status.errors.full_messages.each do |message| %>
+      <% @status.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
