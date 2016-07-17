@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <div class="page-header">
    <h1>Here's what people are saying about Otters!</h1>
 </div>
@@ -17,5 +18,8 @@
       </span>
     </div>
    </div>
+   <% end %>
+  <% else %>
+    <% redirect_to action: 'new' %>
+  <% end %>
 
-<% end %>
