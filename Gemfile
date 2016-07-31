@@ -13,7 +13,10 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'simple_form'
-gem 'pg'
+
+group :production do
+	gem 'pg'
+end
 
 group :development, :test do
 	gem 'sqlite3'
