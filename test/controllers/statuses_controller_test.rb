@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path("../../test_helper", __FILE__)
 
 class StatusesControllerTest < ActionController::TestCase
   setup do
@@ -26,7 +26,7 @@ class StatusesControllerTest < ActionController::TestCase
   test "should be logged in to post a status" do
     post :create, status: { content: "Hello" }
     assert_response :redirect
-    asser_redirected_to new_user_session_path
+    assert_redirected_to new_user_session_path
   end
 
   test "should create status when logged in" do
@@ -37,6 +37,17 @@ class StatusesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to status_path(assigns(:status))
+  end
+
+  test "should create status for the current user when logged in" do
+    sign_in users(:christina)
+
+    assert_difference('Status.count') do
+      post :create, status: { content: @status.content, user_id: users(:ally).id }
+    end
+
+    assert_redirected_to status_path(assigns(:status))
+    assert_equal assigns(:status).user_id, users(:christina).id
   end
 
   test "should show status" do
@@ -57,9 +68,23 @@ class StatusesControllerTest < ActionController::TestCase
   end
 
   test "should update status when logged in" do
-    sign_in users(:jason)
+    sign_in users(:christina)
     patch :update, id: @status, status: { content: @status.content }
     assert_redirected_to status_path(assigns(:status))
+  end
+
+ test "should update status for the current user when logged in" do
+    sign_in users(:christina)
+    patch :update, id: @status, status: { content: @status.content, user_id: users(:ally).id }
+    assert_redirected_to status_path(assigns(:status))
+    assert_equal assigns(:status).user_id, users(:christina).id
+  end
+ 
+ test "should not update status if nothing has changed" do
+    sign_in users(:christina)
+    patch :update, id: @status
+    assert_redirected_to status_path(assigns(:status))
+    assert_equal assigns(:status).user_id, users(:christina).id
   end
 
   test "should destroy status" do
