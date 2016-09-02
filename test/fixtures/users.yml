@@ -9,6 +9,7 @@ christina:
    last_name: "D'Astolfo"
    email: "chdastolfo@gmail.com"
    profile_name: "tinadasty"
+   encrypted_password: "$2a$10sFh/Hm8RxDsuPTeBUr6864.GARlcmt7zF2WspaXGr3BIv2C27N.osq"
 
 ally:
    first_name: "Ally"

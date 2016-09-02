@@ -26,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
   	user = User.new(first_name: 'Christina', last_name: "D'Astolfo", email: "chdastolfo@gmail.com")
   	user.password = user.password_confirmation = 'alskjdasd'
 
-  	user.profile_name = 'tinadasty1'
+  	user.profile_name = 'tinadasty_1'
   	assert user.valid?
   end
 
@@ -40,5 +40,9 @@ class UserTest < ActiveSupport::TestCase
     users(:christina).friends << users(:will)
     users(:christina).friends.reload
     assert users(:christina).friends.include?(users(:will))
+  end
+
+  test "that calling to_param on a user returns the profile_name" do
+    assert_equal "tinadasty", users(:christina).to_param
   end
 end

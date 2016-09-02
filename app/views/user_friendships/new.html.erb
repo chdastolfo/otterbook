@@ -1,0 +1,13 @@
+<% if @friend %>
+	<h1><%= @friend.full_name %></h1>
+
+  <p>Are you SURE you want to friend that dweeb <%= @friend.full_name %>?</p>
+
+  <%= form_for @user_friendship, method: :post do |form| %>
+    <div class="form form-actions">
+      <%= form.hidden_field :friend_id, value: @friend.profile_name %>
+      <%= submit_tag "Yes, Add Dwee...I Mean, Friend", class: 'btn btn-primary' %>
+      <%= link_to "On Second Thought...", profile_path(@friend), class: 'btn' %>
+    </div>
+  <% end %>
+<% end %>
