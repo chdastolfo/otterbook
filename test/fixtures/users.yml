@@ -15,3 +15,9 @@ ally:
    last_name: "D'Astolfo"
    email: "piebald@gmail.com"
    profile_name: "squishy"
+
+will:
+   first_name: "Will"
+   last_name: "Bowry"
+   email: "bowser@gmail.com"
+   profile_name: "bowser"

@@ -14,6 +14,10 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 gem 'simple_form'
 
+group :test do
+	gem 'shoulda'
+end
+
 group :production do
 	gem 'pg'
 end

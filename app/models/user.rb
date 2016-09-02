@@ -5,15 +5,17 @@
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :statuses
+  has_many :user_friendships
+  has_many :friends, through: :user_friendships
 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :profile_name, presence: true,
-  						   uniqueness: true
-  						   #format: {
-  						    #with: /A[a-zA-Z0-9_-]+z/,
-  						   	#message: 'You have to format your profile name correctly.'
-  						   #}
+  						             uniqueness: true,
+            						    format: {
+            						    with: /^[a-zA-Z0-9_-]+$/, :multiline => true,
+            						   	message: 'You have to format your profile name correctly.'
+            						   }
 
   def full_name
     "#{first_name.to_s} " " #{last_name.to_s}"
