@@ -13,6 +13,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'simple_form'
+gem 'state_machine'
+gem 'factory_girl_rails'
 
 group :test do
 	gem 'shoulda'
