@@ -11,6 +11,23 @@ class StatusesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:statuses)
   end
 
+  test "should display user's posts when not logged in" do
+    users(:blocked_friend).statuses.create(content: 'I suck')
+    users(:will).statuses.create(content: 'I am the worst')
+    get :index
+    assert_match /Non\-blocked status/, response.body
+    assert_match /Blocked\ status/, response.body
+  end
+
+  test "should not display a blocked user's posts when logged in" do
+    sign_in users(:christina)
+    users(:blocked_friend).statuses.create(content: 'I suck')
+    users(:will).statuses.create(content: 'I am the worst')
+    get :index
+    assert_match /Non\-blocked status/, response.body
+    assert_no_match /Blocked\ status/, response.body
+  end
+
   test "should be redirected when not logged in" do
     get :new
     assert_response :redirect

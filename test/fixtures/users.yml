@@ -22,3 +22,9 @@ will:
    last_name: "Bowry"
    email: "bowser@gmail.com"
    profile_name: "bowser"
+
+blocked_friend:
+   first_name: 'Blocked'
+   last_name: 'Friend'
+   email: 'blocked@gmail.com'
+   profile_name: 'yousuck'

@@ -24,6 +24,28 @@
 
   has_many :pending_friends, through: :pending_user_friendships, source: :friend
 
+  has_many :requested_user_friendships, -> { where(user_friendships: { state: "requested" } )}, 
+                                      class_name: 'UserFriendship',
+                                      foreign_key: :user_id
+      
+
+  has_many :requested_friends, through: :pending_user_friendships, source: :friend
+
+  has_many :blocked_user_friendships, -> { where(user_friendships: { state: "blocked" } )}, 
+                                      class_name: 'UserFriendship',
+                                      foreign_key: :user_id
+      
+
+  has_many :blocked_friends, through: :pending_user_friendships, source: :friend
+
+  has_many :accepted_user_friendships, -> { where(user_friendships: { state: "accepted" } )}, 
+                                      class_name: 'UserFriendship',
+                                      foreign_key: :user_id
+      
+
+  has_many :accepted_friends, through: :pending_user_friendships, source: :friend
+
+
   def full_name
     "#{first_name.to_s} " " #{last_name.to_s}"
   end
@@ -38,6 +60,10 @@
     hash = Digest::MD5.hexdigest(downcased_email)
 
     "http://gravatar.com/avatar/#{hash}"
+  end
+
+  def has_blocked?(other_user)
+    blocked_friends.include?(other_user)
   end
 
 end

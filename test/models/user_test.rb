@@ -3,6 +3,16 @@ require File.expand_path("../../test_helper", __FILE__)
 class UserTest < ActiveSupport::TestCase
 	should have_many(:user_friendships)
   should have_many(:friends)
+  should have_many(:pending_user_friendships)
+  should have_many(:pending_friends)
+  should have_many(:requested_user_friendships)
+  should have_many(:requested_friends)
+  should have_many(:blocked_user_friendships)
+  should have_many(:blocked_friends)
+  should have_many(:accepted_user_friendships)
+  should have_many(:accepted_friends)
+
+
 
   test "a user should enter a first name" do
     user = User.new
@@ -44,5 +54,16 @@ class UserTest < ActiveSupport::TestCase
 
   test "that calling to_param on a user returns the profile_name" do
     assert_equal "tinadasty", users(:christina).to_param
+  end
+
+  context "#has_blocked?" do
+    should "return true if a user has blocked another user" do
+      assert users(:christina).has_blocked?(users(:blocked_friend))
+    end
+
+    should "return false if a user has not blocked another user" do
+      assert !users(:christina).has_blocked?(users(:will))
+
+    end
   end
 end

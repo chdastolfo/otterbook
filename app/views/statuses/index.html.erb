@@ -6,6 +6,8 @@
 <%= link_to "New Status", new_status_path, class: "btn btn-success" %>
 
 <% @statuses.each do |status| %>
+
+  <% if can_display_status?(status) %>
    
    <div class="status">
     <div class="row">
@@ -25,6 +27,7 @@
         </div>
       </div>
   </div>
+  <% end %>
    <% end %>
   <% else %>
     <% login_path %>
